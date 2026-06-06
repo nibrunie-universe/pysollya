@@ -111,6 +111,21 @@ def test_bfloat16_small_value():
     """BFloat16 should handle small (subnormal-ish) values."""
     result = bfloat16_sol(S("0.0078125"))  # 2^-7, exact
     assert float(result) == 0.0078125
+    smallest_subnormal = S("0x0.02p-126")
+    result = bfloat16_sol(smallest_subnormal) # smallest subnormal value
+    assert float(result) == smallest_subnormal
+    underflow_value = S("0x0.01p-126")
+    result = bfloat16_sol(underflow_value) # smallest subnormal value
+    assert float(result) != underflow_value
+
+
+def test_bfloat16_display():
+    save_display = get_display()
+    a = S("0x1.08p-126")
+    assert bfloat16_sol(a) == a
+    set_display(hexadecimal)
+    assert  str(bfloat16_sol(a)) == "0x1.08p-126"
+    set_display(save_display)
 
 
 if __name__ == "__main__":
