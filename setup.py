@@ -340,7 +340,7 @@ pysollya_ext = Extension(
 # ---------------------------------------------------------------------------
 setup(
     name="pysollya",
-    version="0.1.1",
+    version="0.1.2",
     description="Self-contained Python wrapper for the Sollya library",
     packages=["pysollya"],
     ext_modules=[pysollya_ext],
