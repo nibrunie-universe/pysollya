@@ -154,6 +154,20 @@ def test_fpminimax_vs_remez():
     assert err_fpm < err_remez * 100
 
 
+def test_display():
+    a = S("0x1.8p-1")
+    assert float(a) == 0.75
+    save_display = get_display()
+    set_display(hexadecimal)
+    assert str(a) == "0x1.8p-1"
+    set_display(dyadic)
+    assert str(a) == "3b-2"
+    set_display(default)
+    assert str(a) == "0.75"
+    set_display(save_display)
+
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_") and callable(fn):
